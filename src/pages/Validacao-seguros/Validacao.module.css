@@ -11,6 +11,7 @@
 .main {
   display: flex;
   gap: 28px;
+  margin-top: 18px;
   align-items: flex-start;
   justify-content: center;
 }

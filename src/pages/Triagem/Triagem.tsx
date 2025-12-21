@@ -15,6 +15,13 @@ interface TriagemProps {
   userCartao?: string;
   userBi?: string;
   onBack?: () => void;
+  onProceedToConsulta?: (data: {
+    altura?: string;
+    peso?: string;
+    batimentos?: string;
+    pressao?: string;
+    triagemId?: string;
+  }) => void;
 }
 
 const Triagem: React.FC<TriagemProps> = ({
@@ -23,6 +30,7 @@ const Triagem: React.FC<TriagemProps> = ({
   userCartao = "xxxxxx",
   userBi = "xxxxxxxxxxxxxxxxxx",
   onBack,
+  onProceedToConsulta,
 }) => {
   const [vitals, setVitals] = useState<TriagemData>({
     altura: "",
@@ -45,7 +53,35 @@ const Triagem: React.FC<TriagemProps> = ({
     e.preventDefault();
     console.log("Triagem data:", vitals);
     setSubmitted(true);
-    // Could send to API here
+    // Save triagem record locally so it can be sent later
+    try {
+      const id = `${Date.now()}`;
+      const record = {
+        id,
+        timestamp: new Date().toISOString(),
+        userName,
+        userPhoto,
+        userCartao,
+        userBi,
+        vitals,
+        sent: false,
+      };
+
+      const key = "triagem_records";
+      const raw = localStorage.getItem(key);
+      const arr = raw ? JSON.parse(raw) : [];
+      arr.push(record);
+      localStorage.setItem(key, JSON.stringify(arr));
+
+      if (onProceedToConsulta) {
+        onProceedToConsulta({ ...vitals, triagemId: id });
+      }
+    } catch (err) {
+      console.error("Failed saving triagem to localStorage", err);
+      if (onProceedToConsulta) {
+        onProceedToConsulta(vitals);
+      }
+    }
   };
 
   return (
@@ -88,7 +124,7 @@ const Triagem: React.FC<TriagemProps> = ({
                 </div>
                 <div className={styles.statusLine}>
                   <span>Status:</span>
-                  <span className={styles.statusBadge}>Em análise</span>
+                  <span className={styles.statusBadge}>Aceite</span>
                 </div>
               </div>
             </div>

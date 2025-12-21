@@ -1,0 +1,204 @@
+/* Concise, minimal styles for Consulta */
+.page {
+  min-height: 100vh;
+  background: #f8fbf9;
+}
+.main {
+  display: flex;
+  gap: 24px;
+  padding: 20px;
+  height: calc(100vh - 72px);
+  align-items: flex-start;
+}
+.left {
+  flex: 0 0 38%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.patientCard {
+  width: 100%;
+  max-width: 360px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9f2ec;
+}
+.avatarWrap {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 12px;
+}
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.avatarPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 32px;
+  background: #e6f7ee;
+  color: #2b6b3a;
+}
+.name {
+  text-align: center;
+  font-weight: 800;
+  font-size: 18px;
+  margin: 6px 0;
+}
+.plan {
+  text-align: center;
+  color: #5e9f68;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.info {
+  margin-top: 10px;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #516b60;
+  margin-bottom: 8px;
+}
+.approved {
+  color: #2b8b3a;
+  font-weight: 800;
+}
+.updateButton {
+  background: #fff;
+  border: 1px solid #dbeee0;
+  color: #2b6b3a;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.card {
+  width: 100%;
+  max-width: 680px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid #eef6f0;
+}
+.title {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  color: #154e2b;
+  font-weight: 800;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.fileRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  background: #fbfffc;
+  border: 1px solid #eef7ee;
+}
+.thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  background: #f1f7f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fileControls {
+  flex: 1;
+}
+.fileText {
+  font-size: 13px;
+  color: #36594f;
+  margin-bottom: 6px;
+}
+.fileActions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.fileInput {
+  display: none;
+}
+.chooseBtn {
+  background: #f0fff1;
+  border: 1px solid #c9efd1;
+  color: #1f6a39;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.fileName {
+  color: #6d877b;
+  font-size: 13px;
+}
+.notes {
+  min-height: 100px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #eef6f0;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+}
+.verifyBtn {
+  background: #9cc53a;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 800;
+}
+.backBtn {
+  background: #fafafa;
+  border: 1px solid #e6e6e6;
+  padding: 10px 16px;
+  border-radius: 8px;
+}
+.success {
+  margin-top: 10px;
+  color: #2b8b3a;
+  font-weight: 800;
+}
+
+.notesGroup{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+@media (max-width: 900px) {
+  .main {
+    flex-direction: column;
+    height: auto;
+  }
+  .left,
+  .right {
+    width: 100%;
+  }
+}

@@ -3,6 +3,7 @@ import SquareImg from "../../assets/component_foto.png";
 import styles from "./Validacao.module.css";
 import Header from "../../components/Header";
 import ValidationStatus from "../../components/ValidationStatus";
+import FlagsCounter, { FlagItem } from "../../components/FlagsCounter";
 
 interface ValidacaoProps {
   onProceedToTriage?: (data: {
@@ -28,6 +29,8 @@ const Validacao: React.FC<ValidacaoProps> = ({ onProceedToTriage }) => {
     model?: string;
     verified?: boolean;
   }>(null);
+  const [flagNotification, setFlagNotification] = useState(false);
+  const [flags, setFlags] = useState<FlagItem[]>([]); // State local de flags
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files && e.target.files[0];
@@ -41,9 +44,7 @@ const Validacao: React.FC<ValidacaoProps> = ({ onProceedToTriage }) => {
     }
   };
 
-  // Parse API response data
   const parseVerificationData = (data: any) => {
-    // Use 'verified' field from API response if available
     const approved = !!(
       data &&
       (data.verified === true ||
@@ -52,7 +53,6 @@ const Validacao: React.FC<ValidacaoProps> = ({ onProceedToTriage }) => {
         data.match === true)
     );
 
-    // Extract similarity score from message or distance
     let similarity = 0;
     if (data && data.message) {
       const scoreMatch = data.message.match(/Similarity Score: ([\d.]+)/);
@@ -60,7 +60,6 @@ const Validacao: React.FC<ValidacaoProps> = ({ onProceedToTriage }) => {
         similarity = parseFloat(scoreMatch[1]);
       }
     } else if (data && typeof data.distance === "number") {
-      // distance is sometimes the inverse of similarity
       similarity = Math.max(0, 1 - data.distance);
     }
 
@@ -70,16 +69,33 @@ const Validacao: React.FC<ValidacaoProps> = ({ onProceedToTriage }) => {
       message:
         data?.message ||
         (approved ? "✅ Verificação bem-sucedida!" : "❌ Verificação falhou"),
-      similarity: Math.round(similarity * 10000) / 100, // percentage
+      similarity: Math.round(similarity * 10000) / 100,
       model: data?.model || "N/A",
       verified: data?.verified || false,
     };
+  };
+
+  // Função para adicionar flag localmente
+  const addSuspiciousFlag = (cartaoNum: string, biNum: string) => {
+    const newFlag: FlagItem = {
+      id: `suspicious-${Date.now()}`,
+      flag: "Possível uso de dados por terceiros",
+      userName: "Acesso Suspeito",
+      userCartao: cartaoNum,
+    };
+
+    setFlags((prev) => [...prev, newFlag]);
+    setFlagNotification(true);
+
+    // Remove notificação após 4 segundos
+    setTimeout(() => setFlagNotification(false), 4000);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setResult(null);
+    setFlagNotification(false);
 
     // Mock data for fallback testing
     const mockData = {
@@ -93,12 +109,22 @@ const Validacao: React.FC<ValidacaoProps> = ({ onProceedToTriage }) => {
       verified: true,
     };
 
+    const mockDataFalse = {
+      detector_backend: "opencv",
+      distance: 0,
+      message: "x Match Found! Similarity Score: 12.5%",
+      model: "ArcFace",
+      similarity_metric: "cosine",
+      threshold: 0.68,
+      user_id: 3,
+      verified: false,
+    };
+
     // If a file was selected, send it to the verification endpoint
     if (file) {
       try {
         const url = "http://10.159.250.247:8000/face-verification/verify/3";
         const form = new FormData();
-        // per spec: only append the file under key 'image_file'
         form.append("image_file", file);
 
         const resp = await fetch(url, {
@@ -108,22 +134,31 @@ const Validacao: React.FC<ValidacaoProps> = ({ onProceedToTriage }) => {
 
         if (!resp.ok) {
           console.error("Upload failed", resp.status, "Using mock data");
-          // Use mock data on error
           const resultData = parseVerificationData(mockData);
           setResult(resultData);
+
+          if (resultData.approved && cartao && bi) {
+            addSuspiciousFlag(cartao, bi);
+          }
         } else {
-          // try parse json response
           const data = await resp.json().catch(() => null);
           console.log("API Response:", data);
 
           const resultData = parseVerificationData(data || mockData);
           setResult(resultData);
+
+          if (resultData.approved && cartao && bi) {
+            addSuspiciousFlag(cartao, bi);
+          }
         }
       } catch (err) {
         console.error("Error uploading file", err, "Using mock data");
-        // Use mock data on error
-        const resultData = parseVerificationData(mockData);
+        const resultData = parseVerificationData(mockDataFalse);
         setResult(resultData);
+
+        if (!resultData.approved && cartao && bi) {
+          addSuspiciousFlag(cartao, bi);
+        }
       } finally {
         setLoading(false);
       }
@@ -131,7 +166,7 @@ const Validacao: React.FC<ValidacaoProps> = ({ onProceedToTriage }) => {
       return;
     }
 
-    // Fallback: if no file, simulate validation using card + BI (existing demo logic)
+    // Fallback: if no file, simulate validation using cartao + bi
     setTimeout(() => {
       const approved = cartao === "123456789" && bi === "123456789";
       setResult(
@@ -139,6 +174,11 @@ const Validacao: React.FC<ValidacaoProps> = ({ onProceedToTriage }) => {
           ? { approved: true, name: "Mário Fernandes" }
           : { approved: false }
       );
+
+      if (approved && cartao && bi) {
+        addSuspiciousFlag(cartao, bi);
+      }
+
       setLoading(false);
     }, 900);
   };
@@ -155,6 +195,52 @@ const Validacao: React.FC<ValidacaoProps> = ({ onProceedToTriage }) => {
   return (
     <div className={styles.page}>
       <Header modulo={"Recepção"} />
+
+      {/* Notificação de Flag */}
+      {flagNotification && (
+        <div
+          style={{
+            position: "fixed",
+            top: 20,
+            right: 20,
+            background: "#e74c3c",
+            color: "white",
+            padding: "16px 24px",
+            borderRadius: "8px",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+            zIndex: 1000,
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            fontSize: "14px",
+            fontWeight: "bold",
+            animation: "slideIn 0.3s ease-out",
+          }}
+        >
+          <span style={{ fontSize: "20px" }}>⚠️</span>
+          <div>
+            <div>Flag registrada</div>
+            <div style={{ fontSize: "12px", opacity: 0.9 }}>
+              Possível uso de dados por terceiros
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes slideIn {
+          from {
+            transform: translateX(400px);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+      `}</style>
+
+      <FlagsCounter flags={flags} />
 
       <main className={styles.main}>
         <section className={styles.formPanel}>
@@ -267,47 +353,6 @@ const Validacao: React.FC<ValidacaoProps> = ({ onProceedToTriage }) => {
             }}
           />
         </aside>
-        {/* <aside className={styles.resultPanel} aria-live="polite">
-          {result ? (
-            <div
-              className={`${styles.resultCard} ${result.approved ? styles.approved : styles.denied
-                }`}
-            >
-              {result.approved ? (
-                <>
-                  <div className={styles.icon}>✓</div>
-                  <div className={styles.resText}>
-                    <div className={styles.resName}>{result.name}</div>
-                    <div className={styles.resSubtitle}>
-                      Assegurado confirmado como membro da seguradora.
-                    </div>
-                  </div>
-                  <button className={styles.resetButton} onClick={handleReset}>
-                    Nova verificação
-                  </button>
-                </>
-              ) : (
-                <>
-                  <div className={styles.icon}>✕</div>
-                  <div className={styles.resText}>
-                    <div className={styles.resName}>Não encontrado</div>
-                    <div className={styles.resSubtitle}>
-                      Dados não correspondem ou não elegível.
-                    </div>
-                  </div>
-                  <button className={styles.resetButton} onClick={handleReset}>
-                    Tentar novamente
-                  </button>
-                </>
-              )}
-            </div>
-          ) : (
-            <div className={styles.placeholderCard}>
-              <div className={styles.placeholderIcon}>🔍</div>
-              <div>Resultado de validação aparecerá aqui</div>
-            </div>
-          )}
-        </aside> */}
       </main>
     </div>
   );

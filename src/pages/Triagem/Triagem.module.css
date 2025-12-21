@@ -1,12 +1,12 @@
 .page {
-  min-height: 100vh;
-  background: #f5f5f5;
+  background: #6b8b22;
 }
 
 .mainContent {
   display: flex;
   gap: 0;
-  height: calc(100vh - 80px);
+  margin-top: 18px;
+  height: 100vh;
 }
 
 /* Background Section with Patient Card */

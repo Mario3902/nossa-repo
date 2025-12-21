@@ -1,0 +1,83 @@
+.counter {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  background: #0a3057;
+  color: white;
+  padding: 8px 10px;
+  border-radius: 28px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1200;
+  box-shadow: 0 6px 18px rgba(10, 48, 87, 0.18);
+}
+
+.icon {
+  font-size: 14px;
+}
+.badge {
+  background: #ff4d4f;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 20px;
+  z-index: 1300;
+}
+.panel {
+  width: 360px;
+  max-height: 70vh;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  overflow: auto;
+}
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  border-bottom: 1px solid #eee;
+}
+.panel .list {
+  padding: 10px;
+}
+.item {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+  padding: 8px;
+  border-radius: 6px;
+}
+.item + .item {
+  border-top: 1px solid #f4f4f4;
+}
+.itemText {
+  color: #222;
+}
+.empty {
+  color: #666;
+  padding: 12px;
+}
+.goto {
+  background: #0a3057;
+  color: white;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: none;
+}
+.close {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+}

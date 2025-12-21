@@ -1,0 +1,201 @@
+.page {
+  background: linear-gradient(180deg, #f7fbfb 0%, #ffffff 100%);
+  min-height: 100vh;
+  margin: 20px;
+}
+
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.header {
+  font-size: 24px;
+  font-weight: 800;
+  color: #133f2b;
+  margin: 0;
+}
+
+.cartao {
+  font-size: 13px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.backBtn {
+  padding: 8px 12px;
+  background: #eee;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  transition: background 0.2s;
+}
+
+.backBtn:hover {
+  background: #ddd;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.select {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 13px;
+}
+
+.consultasWrap {
+  display: grid;
+  gap: 12px;
+}
+
+.emptyState {
+  background: white;
+  padding: 40px 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.emptyTitle {
+  font-weight: 700;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.emptyText {
+  color: #999;
+  font-size: 13px;
+}
+
+.card {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  border-left: 4px solid #ddd;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.dateTime {
+  font-weight: 600;
+  color: #333;
+  font-size: 13px;
+}
+
+.flagBadge {
+  background: #fff3cd;
+  color: #856404;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.vitals {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.vitalItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.vitalLabel {
+  color: #666;
+  font-weight: 500;
+}
+
+.vitalValue {
+  color: #333;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.vitalAlert {
+  color: #f44 !important;
+}
+
+.flagItem {
+  background: #ffe8e8;
+  color: #c33;
+  padding: 8px;
+  border-radius: 4px;
+  margin: 8px 0;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.files {
+  margin: 12px 0;
+  padding: 8px;
+  background: #f9f9f9;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.fileItem {
+  margin-top: 4px;
+  color: #555;
+}
+
+.cardActions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.detailBtn {
+  flex: 1;
+  padding: 8px 12px;
+  background: #06b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+  transition: background 0.2s;
+}
+
+.detailBtn:hover {
+  background: #059;
+}
+
+.error {
+  background: white;
+  padding: 40px 20px;
+  border-radius: 8px;
+  text-align: center;
+  color: #c33;
+  font-weight: 600;
+}

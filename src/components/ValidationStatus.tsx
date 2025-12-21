@@ -80,7 +80,7 @@ const ValidationStatus: React.FC<ValidationStatusProps> = ({
 
           <div className={styles.info}>
             <div className={styles.name}>
-              {isApproved ? userName : "Não Encontrado"}
+              {isApproved ? userName : `${userName} - Encontrado, porém a imagem não condiz com o utilizador oficial.`}
             </div>
             <div className={styles.sub}>
               {isApproved ? planName : "Inválido"}
@@ -143,7 +143,7 @@ const ValidationStatus: React.FC<ValidationStatusProps> = ({
           )}
         </>
       )}
-      {isApproved && onProceedToTriage && (
+      {(
         <button className={styles.triageButton} onClick={onProceedToTriage}>
           Ir para Triagem
         </button>
