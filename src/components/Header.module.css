@@ -1,0 +1,21 @@
+.header {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.15);
+  color: #34D399;
+  background: #295059;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 12px 12px;
+  font-size: 28px;
+  height: 55px;
+  font-weight: 700;
+  border-radius: 4px;
+  margin-bottom: 18px;
+}
+
+.header img{
+    transform: translateY(-35%);
+    height: 100px;
+    width: auto;
+}

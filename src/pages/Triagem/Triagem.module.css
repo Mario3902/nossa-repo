@@ -1,0 +1,396 @@
+.page {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.mainContent {
+  display: flex;
+  gap: 0;
+  height: calc(100vh - 80px);
+}
+
+/* Background Section with Patient Card */
+.backgroundSection {
+  flex: 0 0 50%;
+  position: relative;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #7fa62a 0%, #6b8b22 100%);
+  overflow: hidden;
+}
+
+.bgImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+  z-index: 0;
+}
+
+.patientCard {
+  position: relative;
+  z-index: 2;
+  background: rgba(30, 80, 55, 0.92);
+  border-radius: 20px;
+  padding: 32px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.avatarSection {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatarPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #5ba6db 0%, #3d7bb6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.patientInfo {
+  width: 100%;
+}
+
+.patientName {
+  color: white;
+  font-size: 20px;
+  font-weight: 900;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.5px;
+}
+
+.infoLine {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.infoValue {
+  font-family: "Courier New", monospace;
+  font-weight: 700;
+  color: #a5d6a7;
+  letter-spacing: 0.5px;
+}
+
+.statusLine {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-weight: 500;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.statusBadge {
+  background: linear-gradient(
+    135deg,
+    rgba(132, 204, 22, 0.3) 0%,
+    rgba(165, 214, 167, 0.3) 100%
+  );
+  color: #84cc16;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 12px;
+  border: 1px solid rgba(132, 204, 22, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.addButton {
+  width: 100%;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #a4c639 0%, #8fb130 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 20px rgba(164, 198, 57, 0.3);
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.addButton:hover {
+  background: linear-gradient(135deg, #b8d640 0%, #9ebf3d 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(164, 198, 57, 0.5);
+}
+
+.addButton:active {
+  transform: translateY(-1px);
+}
+
+.titleSection {
+  display: none;
+}
+
+.pageTitle {
+  display: none;
+}
+
+/* Form Section */
+.formSection {
+  flex: 0 0 50%;
+  background: white;
+  padding: 60px 50px 40px 50px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.formCard {
+  width: 100%;
+  max-width: 480px;
+}
+
+.formTitle {
+  color: #1b5e20;
+  font-size: 24px;
+  font-weight: 900;
+  margin: 0 0 32px 0;
+  letter-spacing: -0.5px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.fieldsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fieldGroup label {
+  color: #333;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.input {
+  padding: 13px 15px;
+  border: 2px solid #e8e8e8;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #f8f8f8;
+  transition: all 0.25s ease;
+  font-weight: 500;
+}
+
+.input:focus {
+  outline: none;
+  background-color: white;
+  border-color: #a4c639;
+  box-shadow: 0 0 0 4px rgba(164, 198, 57, 0.12);
+}
+
+.input:hover {
+  border-color: #a4c639;
+  background-color: #fefefe;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.submitButton {
+  flex: 1;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 13px;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(255, 193, 7, 0.3);
+}
+
+.submitButton:hover {
+  background: linear-gradient(135deg, #ffb300 0%, #ffa000 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4);
+}
+
+.backButton {
+  flex: 1;
+  padding: 14px 24px;
+  background: #f0f0f0;
+  color: #555;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 13px;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backButton:hover {
+  background: #e8e8e8;
+  border-color: #a4c639;
+  color: #333;
+}
+
+.successMessage {
+  margin-top: 24px;
+  padding: 16px;
+  background: rgba(46, 125, 50, 0.1);
+  border-left: 4px solid #2e7d32;
+  color: #2e7d32;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .backgroundSection {
+    padding: 30px 15px;
+  }
+
+  .patientCard {
+    padding: 24px;
+  }
+
+  .formSection {
+    padding: 50px 30px 30px 30px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .mainContent {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .backgroundSection {
+    flex: 1;
+    min-height: 450px;
+    padding: 40px 20px;
+  }
+
+  .formSection {
+    flex: 1;
+    min-height: auto;
+    padding: 40px 20px;
+  }
+
+  .fieldsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .buttonGroup {
+    flex-direction: row;
+  }
+
+  .submitButton,
+  .backButton {
+    flex: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .patientCard {
+    max-width: 90%;
+    padding: 20px;
+  }
+
+  .formTitle {
+    font-size: 18px;
+  }
+
+  .formSection {
+    padding: 30px 15px;
+  }
+
+  .fieldsGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .submitButton,
+  .backButton {
+    width: 100%;
+  }
+}

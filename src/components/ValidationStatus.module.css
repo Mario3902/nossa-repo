@@ -1,0 +1,353 @@
+.cardContainer {
+  background: #1b5e20;
+  /* Dark green */
+  border-radius: 20px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 480px;
+  /* Keep it tall */
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background circles decoration */
+.cardContainer::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 70%
+  );
+  top: -50px;
+  right: -50px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Illustration Area */
+.illustration {
+  margin-bottom: 40px;
+  position: relative;
+  height: 120px;
+  width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.previewImage {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Stamp CSS Drawing */
+.stampWrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.stampHandle {
+  width: 25px;
+  height: 55px;
+  background: #ffc107;
+  /* Yellow */
+  position: absolute;
+  top: 0;
+  right: 15px;
+  border-radius: 12px;
+  transform: rotate(45deg);
+  z-index: 2;
+  box-shadow: inset -2px -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.stampHandleBase {
+  width: 35px;
+  height: 25px;
+  background: #ffa000;
+  /* Darker Yellow */
+  position: absolute;
+  top: 35px;
+  right: 40px;
+  border-radius: 50%;
+  transform: rotate(45deg);
+  z-index: 3;
+}
+
+.stampBody {
+  background: #455a64;
+  width: 60px;
+  height: 30px;
+  border-radius: 10px;
+  position: absolute;
+  top: 40px;
+  right: 20px;
+  transform: rotate(45deg);
+  z-index: 2;
+}
+
+.stampCircle {
+  width: 60px;
+  height: 60px;
+  background: #2ecc71;
+  /* Green success */
+  border-radius: 50%;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.stampCircle::after {
+  content: "✓";
+  color: #fff;
+  font-size: 36px;
+  font-weight: 900;
+}
+
+/* Loading State Animation */
+.loadingSpinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loadingText {
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* User Result Card */
+.userPill {
+  background: #e0e0e0;
+  /* Light Gray/White */
+  border-radius: 50px;
+  padding: 8px 12px 8px 8px;
+  /* Compact padding */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+  box-sizing: border-box;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  margin-bottom: 20px;
+  animation: slideUp 0.4s ease-out;
+}
+
+.avatar {
+  background: #90caf9;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #fff;
+  flex-shrink: 0;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+.name {
+  color: #222;
+  font-weight: 700;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-align: left;
+}
+
+.sub {
+  color: #666;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.statusIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.statusApproved {
+  color: #2e7d32;
+  border: 2px solid #2e7d32;
+}
+
+.statusApproved svg {
+  width: 20px;
+  height: 20px;
+}
+
+.statusRejected {
+  color: #c62828;
+  border: 2px solid #c62828;
+}
+
+/* Message Text */
+.footerMessage {
+  color: #a5d6a7;
+  /* Light Green */
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 10px;
+  font-weight: 500;
+  max-width: 90%;
+}
+
+.errorMessage {
+  color: #ef9a9a;
+  /* Light Red */
+}
+
+/* Score Container */
+.scoreContainer {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 280px;
+  text-align: center;
+}
+
+.scoreLabel {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.scoreValue {
+  color: #a5d6a7;
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.scoreBar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.scoreFill {
+  height: 100%;
+  background: linear-gradient(90deg, #81c784 0%, #a5d6a7 100%);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modelLabel {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 10px;
+  margin-top: 8px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Triage Button */
+.triageButton {
+  margin-top: 20px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #a4c639 0%, #8fb130 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(164, 198, 57, 0.3);
+}
+
+.triageButton:hover {
+  background: linear-gradient(135deg, #b8d640 0%, #9ebf3d 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(164, 198, 57, 0.5);
+}
+
+.triageButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(164, 198, 57, 0.2);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
